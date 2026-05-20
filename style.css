@@ -1,3 +1,4 @@
+/* this controls the placement of the calculator on the page  */
 body {
 	height: 100vh;
 	display: flex;
@@ -17,8 +18,8 @@ body {
   justify-content: center;
   align-items: center;
   padding: 50px 0;
-  /* gap: 10px; */
 }
+
 /* child of calculator, no children  */
 #display {
 	height: 100px;
@@ -31,15 +32,19 @@ body {
 	justify-content: end;
 	align-items: end;
 	font-size: 10vh;
+	font-family: "WDXL Lubrifont TC", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
+
 /* child of calculator, parent of #numbers and #operators */
 #button-wrapper {
   display: flex;
   width: 700px;
   flex-grow: 1;
   gap: 5px;
-  
 }
+
 /* child of calculator, parent of #all clear and #backspace */
 #clears {
 	display: flex;
@@ -48,8 +53,8 @@ body {
 	flex-basis: 0;
 	gap: 5px;
 	margin-top: 5px;
-	
 }
+
 /* child of button wrapper, parent of buttons #zero through #nine,
 #equals, and #decimal */
 #numbers {
@@ -59,6 +64,7 @@ body {
 	flex-basis: 0;
 	gap: 5px;
 }
+
 /* child of button wrapper, parent of #add, #subtract, #multiply, and #divide */
 #operators {
 	display: flex;
@@ -67,6 +73,7 @@ body {
 	flex-basis: 0;
 	gap: 5px;
 }
+
 /* all individual buttons */
 .button {
 	border: 2px solid hotpink;
@@ -78,31 +85,31 @@ body {
 	/* padding: 0; */
 	/* margin: 0; */
 }
+
+/* this is the hover for all the buttons */
+.button:hover, #equals:hover, #decimal:hover {
+	background-color: magenta;
+	color: darkmagenta;
+}
+
 /* children of #numbers, no children */
 .number {
 	background-color: mistyrose;
 	width: calc(33.3% - (10px / 3));
-	/* height: 10vh; */
-	/* flex-grow: 1; */
-	/* margin: 5px; */
-	/* padding: 5px; */
 }
+
 /* children of #operators, no children */
 .operator {
 	background-color: lavenderblush;
 	width: 100%;
-	/* height: 10vh; */
-	/* flex-grow: 1; */
 }
+
 /* children of #clears, no children */
 .clear {
 	background-color: lightpink;
 	width: 50%;
-	/* flex-grow: 1; */
-	/* height: 10vh; */
 }
 
 #equals, #decimal {
 	background-color: lavenderblush;
-	
 }
