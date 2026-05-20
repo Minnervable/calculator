@@ -1,39 +1,65 @@
+/* parent container of all other elements */
 .calculator {
   height: 800px;
   width: 800px;
   border: 4px solid palevioletred;
   border-radius: 10px;
   background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
 }
-
+/* child of calculator, no children  */
 #display {
 	height: 100px;
 	width: 700px;
 	background-color:pink;
 	color: deeppink;
 }
-
+/* child of calculator, parent of #numbers and #operators */
 #button-wrapper {
   display: flex;
+  width: 700px;
 
 }
-
+/* child of button wrapper, parent of buttons #zero through #nine,
+#equals, and #decimal */
+#numbers {
+	display: flex;
+	flex-wrap: wrap;
+	flex-grow: 3;
+	flex-basis: 0;
+}
+/* child of button wrapper, parent of #add, #subtract, #multiply, and #divide */
+#operators {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	flex-basis: 0;
+}
+/* child of calculator, parent of #all clear and #backspace */
+#clears {
+	display: flex;
+	width: 700px;
+}
+/* all individual buttons */
 .button {
 	border: 2px solid hotpink;
-	border-radius: 50%;
-	height: 100px;
-	width: 100px;
+	border-radius: 5px;
 	color: deeppink;
 }
-
+/* children of #numbers, no children */
 .number {
 	background-color: mistyrose;
+	width: 33.3%;
 }
-
+/* children of #operators, no children */
 .operator {
 	background-color: lavenderblush;
+	width: 100%;
 }
-
+/* children of #clears, no children */
 .clear {
 	background-color: lightpink;
+	flex-grow: 2;
+	flex-basis: 0;
 }
