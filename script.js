@@ -55,7 +55,7 @@ buttons.forEach(function (button) {
 			display.textContent = "";
 			setTimeout(function () {
 				display.textContent = screen;
-			}, 50);
+			}, 32);
 			return;
 		}
 		if (button.id === "decimal") {
@@ -266,6 +266,6 @@ window.addEventListener("keydown", function (event) {
 		buttonToClick.click();
 		setTimeout(function () {
 			buttonToClick.classList.remove("pressed");
-		}, 25);
+		}, 48);
 	}
 });
