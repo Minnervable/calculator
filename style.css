@@ -87,7 +87,7 @@ body {
 }
 
 /* this is the hover for all the buttons */
-.button:hover, #equals:hover, #decimal:hover, #change-sign:hover{
+.button:hover, button.pressed, #equals:hover, #decimal:hover, #change-sign:hover{
 	background-color: magenta;
 	color: darkmagenta;
 }
@@ -109,18 +109,18 @@ body {
 	background-color: lightpink;
 	flex-grow: 1;
 }
-
+/* children of numbers, no children  */
 #equals, #decimal {
 	background-color: lavenderblush;
 		width: calc(33.3% - (10px / 3));
 
 }
-
+/* child of numbers, no children */
 .button.disabled#decimal {
 	background-color: magenta;
 	color: darkmagenta;
 } 
-
+/* child of clears, no children */
 #change-sign {
 	background-color: peachpuff;
 	width: calc((100% - 5px) * 0.25);
