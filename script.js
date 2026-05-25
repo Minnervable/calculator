@@ -15,9 +15,10 @@ function divide(firstNumber, secondNumber) {
 }
 
 const infinity = [
-	"and then chaos ensued",
+	"And then chaos ensued",
 	"A black hole",
 	"The end of the universe",
+	"Cookies: 0 Friends: 0",
 ];
 let infinityCounter = 0;
 let initialNumber;
@@ -29,11 +30,11 @@ let newNumber = true;
 function operate(op, firstNumber, secondNumber) {
 	switch (op) {
 		case "+":
-			return add(firstNumber, secondNumber);
+			return +add(firstNumber, secondNumber).toFixed(8);
 		case "-":
-			return subtract(firstNumber, secondNumber);
+			return +subtract(firstNumber, secondNumber).toFixed(8);
 		case "*":
-			return multiply(firstNumber, secondNumber);
+			return +multiply(firstNumber, secondNumber).toFixed(8);
 		case "/":
 			if (secondNumber === 0) {
 				let currentJoke = infinity[infinityCounter];
@@ -42,9 +43,8 @@ function operate(op, firstNumber, secondNumber) {
 					infinityCounter = 0;
 				}
 				return currentJoke;
-				// return "Slow your roll!";
 			} else {
-				return divide(firstNumber, secondNumber);
+				return +divide(firstNumber, secondNumber).toFixed(8);
 			}
 	}
 }
@@ -58,17 +58,26 @@ buttons.forEach(function (button) {
 			}, 50);
 			return;
 		}
-		if (button.classList.contains("disabled")) {
-			return;
-		}
 		if (button.id === "decimal") {
 			button.classList.add("disabled");
 			if (newNumber === true) {
 				display.textContent = "0" + button.textContent;
 				newNumber = false;
-				// phaseTracker = "firstNumber";
+				if (phaseTracker === "idle") {
+					phaseTracker = "firstNumber";
+				}
 				return;
 			}
+		}
+		if (button.classList.contains("number") || button.id === "decimal") {
+			if (newNumber === true) {
+				display.textContent = "";
+				newNumber = false;
+			}
+			display.textContent = display.textContent + button.textContent;
+		}
+		if (button.classList.contains("disabled")) {
+			return;
 		}
 
 		if (
@@ -80,15 +89,8 @@ buttons.forEach(function (button) {
 			display.textContent = "";
 			newNumber = false;
 		}
-		if (button.classList.contains("number") || button.id === "decimal") {
-			newNumber = false;
-			display.textContent = display.textContent + button.textContent;
-		}
 		if (button.id === "all-clear") {
-			// console.log(display.textContent);
 			if (display.textContent !== "") {
-				// 	blink();
-				// return;
 				display.textContent = "0";
 				phaseTracker = "idle";
 				newNumber = true;
@@ -96,20 +98,17 @@ buttons.forEach(function (button) {
 				operator = undefined;
 				finalNumber = undefined;
 				document.querySelector("#decimal").classList.remove("disabled");
-				// return;
 			}
 		}
 		if (button.id === "backspace") {
 			if (display.textContent !== "") {
-				// 	blink();
-				// return;
 				display.textContent = display.textContent.slice(0, -1);
 			}
 			if (display.textContent === "") {
 				display.textContent = "0";
 				newNumber = true;
 			}
-			if (phaseTracker === "firsNumber") {
+			if (phaseTracker === "firstNumber") {
 				initialNumber = display.textContent;
 			} else if (phaseTracker === "secondNumber") {
 				finalNumber = display.textContent;
@@ -117,18 +116,9 @@ buttons.forEach(function (button) {
 		}
 		switch (phaseTracker) {
 			case "idle":
-				if (
-					button.classList.contains("number")
-					// button.id !== "equals" &&
-					// !button.classList.contains("clear") &&
-					// !button.classList.contains("operator") &&
-					// button.id !== "decimal"
-				) {
-					// 	blink();
-					// return;
+				if (button.classList.contains("number")) {
 					display.textContent = button.textContent;
 					phaseTracker = "firstNumber";
-					// newNumber = true;
 				}
 				if (button.id === "decimal") {
 					phaseTracker = "firstNumber";
@@ -138,44 +128,27 @@ buttons.forEach(function (button) {
 
 			case "firstNumber":
 				if (button.classList.contains("operator")) {
-					if (newNumber === true) {
-						operator = button.textContent;
-					} else {
-						if (operator !== undefined) {
-							display.textContent = operate(
-								operator,
-								+initialNumber,
-								+display.textContent,
-							);
-						}
-						operator = button.textContent;
-						phaseTracker = "secondNumber";
-						initialNumber = display.textContent;
-						// blink(display.textContent);
-						document
-							.querySelector("#decimal")
-							.classList.remove("disabled");
-						newNumber = true;
+					if (operator !== undefined) {
+						display.textContent = operate(
+							operator,
+							+initialNumber,
+							+display.textContent,
+						);
 					}
+					operator = button.textContent;
+					phaseTracker = "secondNumber";
+					initialNumber = display.textContent;
+					document
+						.querySelector("#decimal")
+						.classList.remove("disabled");
+					newNumber = true;
 				}
-				// console.log(initialNumber, display.textContent);
-				// if (button.id === "equals") {
-				// 	// blink(display.textContent);
-				// 	return;
-				// } else if (
-				// 	button.id === "equals" &&
-				// 	display.textContent === initialNumber
-				// ) {
-				// 	// blink(display.textContent);
-				// 	return;
-				// }
 
 				break;
 
 			case "secondNumber":
 				if (button.id === "equals") {
 					finalNumber = display.textContent;
-					// console.log(operator, initialNumber, finalNumber);
 					display.textContent = operate(
 						operator,
 						+initialNumber,
@@ -184,7 +157,7 @@ buttons.forEach(function (button) {
 					phaseTracker = "firstNumber";
 					initialNumber = display.textContent;
 					finalNumber = "";
-					operator = "";
+					operator = undefined;
 					newNumber = true;
 					document
 						.querySelector("#decimal")
