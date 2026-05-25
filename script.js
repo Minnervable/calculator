@@ -114,6 +114,17 @@ buttons.forEach(function (button) {
 				finalNumber = display.textContent;
 			}
 		}
+		if (button.id === "change-sign") {
+			display.textContent = display.textContent * -1;
+			if (phaseTracker === "firstNumber") {
+				initialNumber = display.textContent;
+			} else if (
+				phaseTracker === "secondNumber" &&
+				finalNumber !== undefined
+			) {
+				finalNumber = display.textContent;
+			}
+		}
 		switch (phaseTracker) {
 			case "idle":
 				if (button.classList.contains("number")) {

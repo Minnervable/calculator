@@ -87,7 +87,7 @@ body {
 }
 
 /* this is the hover for all the buttons */
-.button:hover, #equals:hover, #decimal:hover {
+.button:hover, #equals:hover, #decimal:hover, #change-sign:hover{
 	background-color: magenta;
 	color: darkmagenta;
 }
@@ -107,7 +107,7 @@ body {
 /* children of #clears, no children */
 .clear {
 	background-color: lightpink;
-	width: 50%;
+	flex-grow: 1;
 }
 
 #equals, #decimal {
@@ -119,4 +119,10 @@ body {
 .button.disabled#decimal {
 	background-color: magenta;
 	color: darkmagenta;
+} 
+
+#change-sign {
+	background-color: peachpuff;
+	width: calc((100% - 5px) * 0.25);
+	flex-grow: 0;
 }
