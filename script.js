@@ -197,3 +197,75 @@ buttons.forEach(function (button) {
 		blink(display.textContent);
 	});
 });
+
+window.addEventListener("keydown", function (event) {
+	let key = event.key;
+	let buttonId;
+	switch (key) {
+		case "0":
+			buttonId = "#zero";
+			break;
+		case "1":
+			buttonId = "#one";
+			break;
+		case "2":
+			buttonId = "#two";
+			break;
+		case "3":
+			buttonId = "#three";
+			break;
+		case "4":
+			buttonId = "#four";
+			break;
+		case "5":
+			buttonId = "#five";
+			break;
+		case "6":
+			buttonId = "#six";
+			break;
+		case "7":
+			buttonId = "#seven";
+			break;
+		case "8":
+			buttonId = "#eight";
+			break;
+		case "9":
+			buttonId = "#nine";
+			break;
+		case "Enter":
+			buttonId = "#equals";
+			break;
+		case "Backspace":
+			buttonId = "#backspace";
+			break;
+		case "+":
+			buttonId = "#add";
+			break;
+		case "-":
+			buttonId = "#subtract";
+			break;
+		case "*":
+			buttonId = "#multiply";
+			break;
+		case "/":
+			buttonId = "#divide";
+			break;
+		case ".":
+			buttonId = "#decimal";
+			break;
+		case "Delete":
+			buttonId = "#all-clear";
+			break;
+		case "Shift":
+			buttonId = "#change-sign";
+			break;
+	}
+	if (buttonId !== undefined) {
+		let buttonToClick = this.document.querySelector(buttonId);
+		buttonToClick.classList.add("pressed");
+		buttonToClick.click();
+		setTimeout(function () {
+			buttonToClick.classList.remove("pressed");
+		}, 25);
+	}
+});
